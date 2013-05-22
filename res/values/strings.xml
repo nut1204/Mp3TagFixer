@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MediaTagConvertor</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">FileName</string>
+    <string name="to">to</string>
+    <string name="editText_hint">load file</string>
+
+</resources>
