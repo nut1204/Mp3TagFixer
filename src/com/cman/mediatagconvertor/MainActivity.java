@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,35 +26,24 @@ public class MainActivity extends Activity {
 
 		final ListView listview = (ListView) findViewById(R.id.listView1);
 		final ArrayList<String> list = new ArrayList<String>();
-
+		List<ID3Tag> id3TagList = new ArrayList<ID3Tag>();
 		try {
 			File curentDir = new File(getCurrentDir());
 			List<File> files = getListFiles(curentDir);
-			List<ID3Tag> id3TagList = getListID3Tag(files);
+			id3TagList = getListID3Tag(files);
 			for (int i = 0; i < id3TagList.size(); ++i) {
 				list.add(id3TagList.get(i).getTitle());
 			}
 			list.add(getCurrentDir());
 			list.add("size : " + id3TagList.size());
+
 		} catch (Exception e) {
 			list.add("list error: " + e.getMessage());
 		}
 
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
-				R.layout.list_fruit, list);
-		listview.setAdapter(arrayAdapter);
-
-		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, final View view,
-					int position, long id) {
-				Toast.makeText(getApplicationContext(),
-						"Click ListItem Number " + position, Toast.LENGTH_LONG)
-						.show();
-			}
-		});
-
+		ArrayAdapter<ID3Tag> adapter = new ID3TagArrayAdapter(this, id3TagList);
+		
+		listview.setAdapter(adapter);
 	}
 
 	private List<ID3Tag> getListID3Tag(List<File> files) {
@@ -70,28 +57,22 @@ public class MainActivity extends Activity {
 
 			String title, encodedTitle;
 			String album, encodedAlbum;
+			String artist, encodeArtist; 
 			title = metaRetriever
 					.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
 			album = metaRetriever
 					.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
-
+			artist = metaRetriever
+					.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+			
 			encodedTitle = getEncoding("title", title);
 			encodedAlbum = getEncoding("album", album);
-
-			// if (title != null && !title.isEmpty()) {
-			// try {
-			// encodedTitle = new String(title.getBytes("ISO-8859-1"),
-			// "tis-620");
-			// } catch (UnsupportedEncodingException e) {
-			// // e.printStackTrace();
-			// encodedTitle = "can't encoded";
-			// }
-			// } else {
-			// encodedTitle = "title is null";
-			// }
-
+			encodeArtist = getEncoding("artist", artist);
+			
 			id3Tag.setTitle(encodedTitle);
 			id3Tag.setAlbum(encodedAlbum);
+			id3Tag.setArtist(encodeArtist);
+			
 			id3TagList.add(id3Tag);
 			metaRetriever.release();
 		}
