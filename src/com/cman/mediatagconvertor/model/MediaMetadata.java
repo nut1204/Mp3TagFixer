@@ -1,10 +1,10 @@
 package com.cman.mediatagconvertor.model;
 
-public class ID3Tag {
-	private String title;
-	private String artist;
-	private String album;
-	private boolean selected;
+public class MediaMetadata {
+	protected String title;
+	protected String artist;
+	protected String album;
+	protected byte[] image;
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -21,7 +21,7 @@ public class ID3Tag {
 	public String getAlbum() {
 		return album;
 	}
-	
+
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
@@ -29,12 +29,12 @@ public class ID3Tag {
 	public String getArtist() {
 		return artist;
 	}
-
-	public boolean isSelected() {
-		return selected;
+	
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
+	public byte[] getImage() {
+		return image;
+	}	
 }

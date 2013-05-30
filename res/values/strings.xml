@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MediaTagConvertor</string>
+    <string name="app_name">MP3Fixer</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">FileName</string>
-    <string name="to">to</string>
-    <string name="editText_hint">load file</string>
+    <string name="confirm">Press to confirm</string>
+    <string name="convert">Convert</string>
+    <string name="title">title</string>
+    <string name="artist">artist</string>
+    <string name="album">album</string>
+    <string name="title_activity_selected_media">Select charset</string>
+    <string name="select_charSets">Charset</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
