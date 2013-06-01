@@ -1,12 +1,14 @@
-package com.cman.mediatagconvertor;
+package com.duriostudio.mp3fixer;
 
 import java.util.ArrayList;
-import java.util.List;
-import com.cman.mediatagconvertor.ListViewAdapter.MediaMetadataWithFileArrayAdapter;
-import com.cman.mediatagconvertor.model.MediaMetadataWithFile;
-import com.cman.mediatagconvertor.model.MediaMetadataParcelable;
-import com.cman.mediatagconvertor.service.FileService;
-import com.cman.mediatagconvertor.service.MediaMetadataService;
+
+import com.cman.mediatagconvertor.R;
+import com.duriostudio.mp3fixer.listViewAdapter.MediaMetadataWithFileArrayAdapter;
+import com.duriostudio.mp3fixer.model.MediaMetadataParcelable;
+import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
+import com.duriostudio.mp3fixer.service.FileService;
+import com.duriostudio.mp3fixer.service.MediaMetadataService;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,7 +20,7 @@ public class SelectMediaActivity extends Activity {
 
 	private static final int REQUEST_CODE = 10;
 	private MediaMetadataWithFileArrayAdapter mediaAdapter;
-	private List<MediaMetadataWithFile> mediaMetadata;
+	private ArrayList<MediaMetadataWithFile> mediaMetadata;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

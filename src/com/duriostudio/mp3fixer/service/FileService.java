@@ -1,4 +1,4 @@
-package com.cman.mediatagconvertor.service;
+package com.duriostudio.mp3fixer.service;
 
 import java.io.File;
 import java.util.ArrayList;

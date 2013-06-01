@@ -1,4 +1,4 @@
-package com.cman.mediatagconvertor.service;
+package com.duriostudio.mp3fixer.service;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,12 +8,13 @@ import org.blinkenlights.jid3.MediaFile;
 import org.blinkenlights.jid3.io.TextEncoding;
 import org.blinkenlights.jid3.v2.ID3V2_3_0Tag;
 import android.media.MediaMetadataRetriever;
-import com.cman.mediatagconvertor.model.MediaMetadata;
-import com.cman.mediatagconvertor.model.MediaMetadataWithFile;
+
+import com.duriostudio.mp3fixer.model.MediaMetadata;
+import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
 
 public class MediaMetadataService {
 
-	public List<MediaMetadataWithFile> getListMediaMetadata(List<File> files) {
+	public ArrayList<MediaMetadataWithFile> getListMediaMetadata(List<File> files) {
 		ArrayList<MediaMetadataWithFile> mediaMetadataList = new ArrayList<MediaMetadataWithFile>();
 		MediaMetadataWithFile mediaMetadata;
 		for (File file : files) {

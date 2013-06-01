@@ -1,13 +1,16 @@
-package com.cman.mediatagconvertor;
+package com.duriostudio.mp3fixer;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.cman.mediatagconvertor.ListViewAdapter.MediaMetadataArrayAdapter;
-import com.cman.mediatagconvertor.model.MediaMetadata;
-import com.cman.mediatagconvertor.model.MediaMetadataParcelable;
-import com.cman.mediatagconvertor.model.MediaMetadataWithFile;
-import com.cman.mediatagconvertor.service.EncodingService;
-import com.cman.mediatagconvertor.service.MediaMetadataService;
+
+import com.cman.mediatagconvertor.R;
+import com.duriostudio.mp3fixer.listViewAdapter.MediaMetadataArrayAdapter;
+import com.duriostudio.mp3fixer.model.MediaMetadata;
+import com.duriostudio.mp3fixer.model.MediaMetadataParcelable;
+import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
+import com.duriostudio.mp3fixer.service.EncodingService;
+import com.duriostudio.mp3fixer.service.MediaMetadataService;
+
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;

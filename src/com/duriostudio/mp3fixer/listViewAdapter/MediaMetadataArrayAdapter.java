@@ -1,4 +1,4 @@
-package com.cman.mediatagconvertor.ListViewAdapter;
+package com.duriostudio.mp3fixer.listViewAdapter;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.cman.mediatagconvertor.R;
-import com.cman.mediatagconvertor.model.MediaMetadata;
+import com.duriostudio.mp3fixer.model.MediaMetadata;
 
 public class MediaMetadataArrayAdapter extends ArrayAdapter<MediaMetadata> {
 

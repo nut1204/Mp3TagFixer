@@ -1,4 +1,4 @@
-package com.cman.mediatagconvertor.model;
+package com.duriostudio.mp3fixer.model;
 
 import java.io.File;
 

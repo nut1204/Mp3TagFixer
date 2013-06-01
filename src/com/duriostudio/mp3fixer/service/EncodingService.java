@@ -1,4 +1,4 @@
-package com.cman.mediatagconvertor.service;
+package com.duriostudio.mp3fixer.service;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedMap;
 
-import com.cman.mediatagconvertor.model.MediaMetadata;
+import com.duriostudio.mp3fixer.model.MediaMetadata;
 
 public class EncodingService {
 

@@ -1,9 +1,7 @@
-package com.cman.mediatagconvertor.ListViewAdapter;
+package com.duriostudio.mp3fixer.listViewAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -19,16 +17,16 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.cman.mediatagconvertor.R;
-import com.cman.mediatagconvertor.model.MediaMetadataWithFile;
+import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
 
 public class MediaMetadataWithFileArrayAdapter extends
 		ArrayAdapter<MediaMetadataWithFile> {
 
 	private final Activity context;
-	private final List<MediaMetadataWithFile> list;
+	private final ArrayList<MediaMetadataWithFile> list;
 
 	public MediaMetadataWithFileArrayAdapter(Activity context,
-			List<MediaMetadataWithFile> list) {
+			ArrayList<MediaMetadataWithFile> list) {
 		super(context, R.layout.list_media_select, list);
 		this.list = list;
 		this.context = context;

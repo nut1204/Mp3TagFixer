@@ -15,7 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnConfirm"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true"
+        android:background="#E5E5E5"
+        android:divider="@drawable/line_divider" >
     </ListView>
 
     <Button
@@ -23,10 +25,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#E5E5E5"
         android:minHeight="48dip"
         android:onClick="confirm"
-        android:padding="0dip"
-        android:paddingBottom="0dip"
         android:text="@string/confirm"
         android:textSize="12sp" />
 
