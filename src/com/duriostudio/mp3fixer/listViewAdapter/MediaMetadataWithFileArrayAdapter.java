@@ -1,11 +1,17 @@
 package com.duriostudio.mp3fixer.listViewAdapter;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -16,12 +22,13 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.cman.mediatagconvertor.R;
+import com.duriostudio.mp3fixer.R;
 import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
 
 public class MediaMetadataWithFileArrayAdapter extends
 		ArrayAdapter<MediaMetadataWithFile> {
 
+	private Bitmap mLoadingBitmap;
 	private final Activity context;
 	private final ArrayList<MediaMetadataWithFile> list;
 
@@ -78,8 +85,7 @@ public class MediaMetadataWithFileArrayAdapter extends
 
 		byte[] image = element.getImage();
 		if (image != null) {
-			holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(
-					image, 0, image.length));
+			loadBitmap(image, holder.imageView);
 		} else {
 			holder.imageView.setImageResource(android.R.color.transparent);
 		}
@@ -90,9 +96,97 @@ public class MediaMetadataWithFileArrayAdapter extends
 		return convertView;
 	}
 
+	private static class AsyncDrawable extends BitmapDrawable {
+		private final WeakReference<BitmapWorkerTask> bitmapWorkerTaskReference;
+
+		public AsyncDrawable(Resources res, Bitmap bitmap,
+				BitmapWorkerTask bitmapWorkerTask) {
+			super(res, bitmap);
+			bitmapWorkerTaskReference = new WeakReference<BitmapWorkerTask>(
+					bitmapWorkerTask);
+		}
+
+		public BitmapWorkerTask getBitmapWorkerTask() {
+			return bitmapWorkerTaskReference.get();
+		}
+	}
+
+	private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) {
+		if (imageView != null) {
+			final Drawable drawable = imageView.getDrawable();
+			if (drawable instanceof AsyncDrawable) {
+				final AsyncDrawable asyncDrawable = (AsyncDrawable) drawable;
+				return asyncDrawable.getBitmapWorkerTask();
+			}
+		}
+		return null;
+	}
+
+	public static boolean cancelPotentialWork(Object data, ImageView imageView) {
+		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+
+		if (bitmapWorkerTask != null) {
+			final byte[] bitmapData = bitmapWorkerTask.data;
+			if (bitmapData != data) {
+				// Cancel previous task
+				bitmapWorkerTask.cancel(true);
+			} else {
+				// The same work is already in progress
+				return false;
+			}
+		}
+		// No task associated with the ImageView, or an existing task was
+		// cancelled
+		return true;
+	}
+
+	public void loadBitmap(byte[] image, ImageView imageView) {
+		// BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+		// task.execute(image);
+		if (cancelPotentialWork(image, imageView)) {
+			final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+			final AsyncDrawable asyncDrawable = new AsyncDrawable(
+					context.getResources(), mLoadingBitmap, task);
+			imageView.setImageDrawable(asyncDrawable);
+			task.execute(image);
+		}
+
+	}
+
+	public class BitmapWorkerTask extends AsyncTask<byte[], Void, Bitmap> {
+		private final WeakReference<ImageView> imageViewReference;
+		private byte[] data = null;
+
+		public BitmapWorkerTask(ImageView imageView) {
+			// Use a WeakReference to ensure the ImageView can be garbage
+			// collected
+			imageViewReference = new WeakReference<ImageView>(imageView);
+		}
+
+		@Override
+		protected Bitmap doInBackground(byte[]... params) {
+			data = params[0];
+			return BitmapFactory.decodeByteArray(data, 0, data.length);
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap bitmap) {
+			if (isCancelled()) {
+				bitmap = null;
+			}
+
+			if (imageViewReference != null && bitmap != null) {
+				final ImageView imageView = imageViewReference.get();
+				final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+				if (this == bitmapWorkerTask && imageView != null) {
+					imageView.setImageBitmap(bitmap);
+				}
+			}
+		}
+	}
+
 	public OnLongClickListener myLong = new OnLongClickListener() {
 		public boolean onLongClick(View view) {
-			// do something
 
 			ViewHolder holder = (ViewHolder) view.getTag();
 			File file = new File(holder.path);
@@ -108,5 +202,4 @@ public class MediaMetadataWithFileArrayAdapter extends
 			return true;
 		}
 	};
-
 }

@@ -9,18 +9,23 @@ import org.blinkenlights.jid3.io.TextEncoding;
 import org.blinkenlights.jid3.v2.ID3V2_3_0Tag;
 import android.media.MediaMetadataRetriever;
 
+import com.duriostudio.mp3fixer.filter.IMediaMetadataFilter;
 import com.duriostudio.mp3fixer.model.MediaMetadata;
 import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
 
 public class MediaMetadataService {
 
-	public ArrayList<MediaMetadataWithFile> getListMediaMetadata(List<File> files) {
+	public ArrayList<MediaMetadataWithFile> getListMediaMetadata(
+			List<File> files, IMediaMetadataFilter mediaFilter) {
 		ArrayList<MediaMetadataWithFile> mediaMetadataList = new ArrayList<MediaMetadataWithFile>();
-		MediaMetadataWithFile mediaMetadata;
+		MediaMetadataWithFile mediaMetadataWithFile;
 		for (File file : files) {
-			mediaMetadata = new MediaMetadataWithFile(file.getAbsolutePath());
-			extractMetadata(mediaMetadata);
-			mediaMetadataList.add(mediaMetadata);
+			mediaMetadataWithFile = new MediaMetadataWithFile(
+					file.getAbsolutePath());
+			extractMetadata(mediaMetadataWithFile);
+			if (mediaFilter.getFilter(mediaMetadataWithFile)) {
+				mediaMetadataList.add(mediaMetadataWithFile);
+			}
 		}
 		return mediaMetadataList;
 	}
@@ -60,17 +65,16 @@ public class MediaMetadataService {
 		artist = metaRetriever
 				.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
 		image = metaRetriever.getEmbeddedPicture();
-		
+
 		mediaMetadata.setTitle(title);
 		mediaMetadata.setAlbum(album);
 		mediaMetadata.setArtist(artist);
 		mediaMetadata.setImage(image);
 
-		validateMetadata(mediaMetadata);
 		metaRetriever.release();
 	}
 
-	private void validateMetadata(MediaMetadataWithFile mediaMetadata) {
+	public void validateMetadata(MediaMetadataWithFile mediaMetadata) {
 		String title = mediaMetadata.getTitle();
 		String artist = mediaMetadata.getArtist();
 

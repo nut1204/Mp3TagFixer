@@ -2,7 +2,8 @@ package com.duriostudio.mp3fixer;
 
 import java.util.ArrayList;
 
-import com.cman.mediatagconvertor.R;
+import com.duriostudio.mp3fixer.R;
+import com.duriostudio.mp3fixer.filter.ExcludeNoMetadata;
 import com.duriostudio.mp3fixer.listViewAdapter.MediaMetadataWithFileArrayAdapter;
 import com.duriostudio.mp3fixer.model.MediaMetadataParcelable;
 import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
@@ -36,7 +37,7 @@ public class SelectMediaActivity extends Activity {
 	public void getDataOnListView() {
 		FileService fileService = new FileService();
 		mediaMetadata = new MediaMetadataService()
-				.getListMediaMetadata(fileService.getListFiles());
+				.getListMediaMetadata(fileService.getListFiles(), new ExcludeNoMetadata());
 
 		if (mediaAdapter == null) {
 			mediaAdapter = new MediaMetadataWithFileArrayAdapter(this,

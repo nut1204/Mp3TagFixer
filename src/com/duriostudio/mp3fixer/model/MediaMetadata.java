@@ -29,12 +29,12 @@ public class MediaMetadata {
 	public String getArtist() {
 		return artist;
 	}
-	
+
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
 	public byte[] getImage() {
 		return image;
-	}	
+	}
 }

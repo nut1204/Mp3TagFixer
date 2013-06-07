@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.cman.mediatagconvertor.R;
+import com.duriostudio.mp3fixer.R;
 import com.duriostudio.mp3fixer.model.MediaMetadata;
 
 public class MediaMetadataArrayAdapter extends ArrayAdapter<MediaMetadata> {
@@ -46,5 +46,4 @@ public class MediaMetadataArrayAdapter extends ArrayAdapter<MediaMetadata> {
 		holder.tvArtist.setText(list.get(position).getArtist());
 		return view;
 	}
-
 }
