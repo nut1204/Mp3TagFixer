@@ -20,7 +20,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_logo"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.CustomizedFullScreen" >
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

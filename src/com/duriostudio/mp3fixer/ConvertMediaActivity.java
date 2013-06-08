@@ -120,6 +120,9 @@ public class ConvertMediaActivity extends Activity implements
 			}
 		}
 		isConvert = true;
+		Toast.makeText(getApplicationContext(),
+				"Convert mp3 finish please clear data in google play music.",
+				Toast.LENGTH_LONG).show();
 		finish();
 	}
 
