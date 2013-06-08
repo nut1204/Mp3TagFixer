@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.duriostudio.mp3fixer.R;
 import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
+import com.duriostudio.mp3fixer.service.FileService;
 
 public class MediaMetadataWithFileArrayAdapter extends
 		ArrayAdapter<MediaMetadataWithFile> {
@@ -37,6 +38,10 @@ public class MediaMetadataWithFileArrayAdapter extends
 		super(context, R.layout.list_media_select, list);
 		this.list = list;
 		this.context = context;
+	}
+
+	public ArrayList<MediaMetadataWithFile> getMediadataWithFileList() {
+		return list;
 	}
 
 	static class ViewHolder {
@@ -79,10 +84,24 @@ public class MediaMetadataWithFileArrayAdapter extends
 
 		MediaMetadataWithFile element = (MediaMetadataWithFile) list
 				.get(position);
-		holder.tbTitle.setText(element.getTitle());
-		holder.tvArtist.setText(element.getArtist());
-		holder.path = element.getPath();
 
+		String title, artist;
+		title = element.getTitle();
+		artist = element.getArtist();
+
+		if (title == null) {
+			holder.tbTitle.setText(FileService.getName(element.getPath()));
+		} else {
+			holder.tbTitle.setText(title);
+		}
+
+		if (artist == null) {
+			holder.tvArtist.setText("unknown artist");
+		} else {
+			holder.tvArtist.setText(artist);
+		}
+
+		holder.path = element.getPath();
 		byte[] image = element.getImage();
 		if (image != null) {
 			loadBitmap(image, holder.imageView);

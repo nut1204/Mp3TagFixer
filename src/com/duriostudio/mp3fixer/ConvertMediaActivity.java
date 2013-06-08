@@ -1,8 +1,6 @@
 package com.duriostudio.mp3fixer;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import com.duriostudio.mp3fixer.R;
 import com.duriostudio.mp3fixer.listViewAdapter.MediaMetadataArrayAdapter;
 import com.duriostudio.mp3fixer.model.MediaMetadata;
@@ -29,7 +27,7 @@ public class ConvertMediaActivity extends Activity implements
 
 	private boolean isConvert;
 	private MediaMetadataArrayAdapter mediaAdapter;
-	private List<MediaMetadataWithFile> mediaMetadataWithFileList;
+	private ArrayList<MediaMetadataWithFile> mediaMetadataWithFileList;
 	private String encoding;
 
 	@Override

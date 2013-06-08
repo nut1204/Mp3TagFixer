@@ -7,13 +7,14 @@ import java.util.List;
 import android.os.Environment;
 
 public class FileService {
-	
+
 	private String getCurrentDir() {
 		String root = Environment.getExternalStorageDirectory().toString();
+		// return root;
 		return root + "/" + Environment.DIRECTORY_MUSIC;
 	}
-	
-	public List<File> getListFiles(){
+
+	public List<File> getListFiles() {
 		File parentDir = new File(getCurrentDir());
 		return getListFiles(parentDir);
 	}
@@ -31,5 +32,14 @@ public class FileService {
 			}
 		}
 		return inFiles;
-	}	
+	}
+
+	public static String getName(String path) {
+		String name = new File(path).getName();
+		int pos = name.lastIndexOf(".");
+		if (pos > 0) {
+			name = name.substring(0, pos);
+		}
+		return name;
+	}
 }

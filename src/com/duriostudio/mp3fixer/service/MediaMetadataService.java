@@ -71,24 +71,29 @@ public class MediaMetadataService {
 		mediaMetadata.setArtist(artist);
 		mediaMetadata.setImage(image);
 
+		//validateMetadata(mediaMetadata);
 		metaRetriever.release();
 	}
 
-	public void validateMetadata(MediaMetadataWithFile mediaMetadata) {
-		String title = mediaMetadata.getTitle();
-		String artist = mediaMetadata.getArtist();
-
-		if (title == null || title.isEmpty()) {
-			String name = mediaMetadata.getFile().getName();
-			int pos = name.lastIndexOf(".");
-			if (pos > 0) {
-				name = name.substring(0, pos);
-			}
-			mediaMetadata.setTitle(name);
-		}
-
-		if (artist == null || artist.isEmpty()) {
-			mediaMetadata.setArtist("Unknown artist");
-		}
-	}
+//	public void validateMetadata(MediaMetadataWithFile mediaMetadata) {
+//		String title = mediaMetadata.getTitle();
+//		String artist = mediaMetadata.getArtist();
+//
+//		// if (title == null || title.isEmpty()) {
+//		// String name = mediaMetadata.getFile().getName();
+//		// int pos = name.lastIndexOf(".");
+//		// if (pos > 0) {
+//		// name = name.substring(0, pos);
+//		// }
+//		// mediaMetadata.setTitle(name);
+//		// }
+//
+//		if (title == null || title.isEmpty()) {
+//			mediaMetadata.setTitle("unknown title");
+//		}
+//		
+//		if (artist == null || artist.isEmpty()) {
+//			mediaMetadata.setArtist("unknown artist");
+//		}
+//	}
 }
