@@ -84,7 +84,7 @@ public class ConvertMediaActivity extends Activity implements
 					mediaMetadataList.add(mmdWithFile);
 				} else {
 					MediaMetadata mediaMetadata = encodingService
-							.getMediaMetadataWithEncoding(mmdWithFile);
+							.getMediaMetadataEncoding(mmdWithFile);
 					mediaMetadataList.add(mediaMetadata);
 				}
 			}
@@ -104,7 +104,9 @@ public class ConvertMediaActivity extends Activity implements
 	}
 
 	public void convert(View view) {
-		if (mediaMetadataWithFileList != null) {
+		boolean canConvert = mediaMetadataWithFileList != null
+				&& !mediaMetadataWithFileList.isEmpty();
+		if (canConvert) {
 			MediaMetadataService mediaMetadataService = new MediaMetadataService();
 			for (MediaMetadataWithFile mediaMetadata : mediaMetadataWithFileList) {
 				try {
@@ -118,12 +120,18 @@ public class ConvertMediaActivity extends Activity implements
 							Toast.LENGTH_LONG).show();
 				}
 			}
+			isConvert = true;
+			Toast.makeText(
+					getApplicationContext(),
+					"Convert mp3 finish please clear data in google play music.",
+					Toast.LENGTH_LONG).show();
+			finish();
+
+		} else {
+			Toast.makeText(getApplicationContext(), "Please select music.",
+					Toast.LENGTH_LONG).show();
 		}
-		isConvert = true;
-		Toast.makeText(getApplicationContext(),
-				"Convert mp3 finish please clear data in google play music.",
-				Toast.LENGTH_LONG).show();
-		finish();
+		
 	}
 
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
@@ -137,6 +145,12 @@ public class ConvertMediaActivity extends Activity implements
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public void onBackPressed() {
+	    super.onBackPressed();
+	    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+	}
 
 	@Override
 	public void finish() {
@@ -145,6 +159,7 @@ public class ConvertMediaActivity extends Activity implements
 			data.putExtra("returnKeyConvert", "Swinging on a star. ");
 		}
 		setResult(RESULT_OK, data);
+		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 		super.finish();
 	}
 

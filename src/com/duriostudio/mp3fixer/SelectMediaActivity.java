@@ -29,7 +29,6 @@ public class SelectMediaActivity extends Activity {
 		setContentView(R.layout.activity_select_media);
 
 		final ListView listview = (ListView) findViewById(R.id.lvMedia);
-		//setMediaAdapter(getDataOnListViewInitial());
 		setMediaAdapter(getDataOnListView());
 		listview.setAdapter(mediaAdapter);
 		listview.setLongClickable(true);

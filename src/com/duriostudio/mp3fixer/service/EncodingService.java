@@ -31,16 +31,17 @@ public class EncodingService {
 		return "Unknown " + metadata;
 	}
 
-	public MediaMetadata getMediaMetadataWithEncoding(
-			MediaMetadata mediaMetadata) {
-
-		String title, artist;
+	public MediaMetadata getMediaMetadataEncoding(MediaMetadata mediaMetadata) {
+		String title, artist, album;
 		MediaMetadata media = new MediaMetadata();
 		title = getEncoding("title", mediaMetadata.getTitle());
 		artist = getEncoding("artist", mediaMetadata.getArtist());
+		album = getEncoding("album", mediaMetadata.getAlbum());
+		
 
 		media.setTitle(title);
 		media.setArtist(artist);
+		media.setAlbum(album);
 		return media;
 	}
 

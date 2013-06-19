@@ -14,21 +14,31 @@
         android:id="@+id/lvMedia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnConfirm"
-        android:layout_alignParentTop="true"
-        android:background="#E5E5E5"
-        android:divider="@drawable/line_divider" >
+        android:layout_above="@+id/item_container"
+        android:layout_alignParentTop="true" >
     </ListView>
 
-    <Button
-        android:id="@+id/btnConfirm"
+    <RelativeLayout
+        android:id="@+id/item_container"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dip"
         android:layout_alignParentBottom="true"
         android:background="#E5E5E5"
-        android:minHeight="48dip"
-        android:onClick="confirm"
-        android:text="@string/confirm"
-        android:textSize="12sp" />
+        android:minHeight="50dip"
+        android:minWidth="50dip" >
+
+        <ImageButton
+            android:id="@+id/btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="#E5E5E5"
+            android:contentDescription="@string/confirm"
+            android:minHeight="50dip"
+            android:minWidth="50dip"
+            android:onClick="confirm"
+            android:src="@drawable/select"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

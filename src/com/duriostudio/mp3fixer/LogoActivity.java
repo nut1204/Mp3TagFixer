@@ -15,9 +15,6 @@ public class LogoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_logo);
 
-		// MediaMetadataTask task = new MediaMetadataTask();
-		// task.execute("");
-
 		Thread splashTimer = new Thread() {
 
 			@Override
@@ -42,35 +39,4 @@ public class LogoActivity extends Activity {
 		};
 		splashTimer.start();
 	}
-
-	// private class MediaMetadataTask extends
-	// AsyncTask<String, Void, ArrayList<MediaMetadataWithFile>> {
-	//
-	// protected ArrayList<MediaMetadataWithFile> doInBackground(
-	// String... params) {
-	// FileService fileService = new FileService();
-	// ArrayList<MediaMetadataWithFile> mediaMetadata = new
-	// MediaMetadataService()
-	// .getListMediaMetadata(fileService.getListFiles(),
-	// new DefaultFilter());
-	// return mediaMetadata;
-	// }
-	//
-	// protected void onPostExecute(
-	// ArrayList<MediaMetadataWithFile> mediaMetadata) {
-	//
-	// ArrayList<MediaMetadataParcelable> mediaMetadataParcelableList = new
-	// ArrayList<MediaMetadataParcelable>();
-	// for (MediaMetadataWithFile media : mediaMetadata) {
-	// mediaMetadataParcelableList.add(new MediaMetadataParcelable(
-	// media));
-	// }
-	// finish();
-	// Intent itn = new Intent(getApplicationContext(),
-	// SelectMediaActivity.class);
-	// itn.putExtra("medialist", mediaMetadataParcelableList);
-	// itn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	// startActivity(itn);
-	// }
-	// }
 }

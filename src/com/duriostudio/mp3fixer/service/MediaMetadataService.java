@@ -4,11 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.blinkenlights.jid3.MP3File;
-import org.blinkenlights.jid3.MediaFile;
 import org.blinkenlights.jid3.io.TextEncoding;
-import org.blinkenlights.jid3.v2.ID3V2_3_0Tag;
+import org.blinkenlights.jid3.v2.ID3V2Tag;
 import android.media.MediaMetadataRetriever;
-
 import com.duriostudio.mp3fixer.filter.IMediaMetadataFilter;
 import com.duriostudio.mp3fixer.model.MediaMetadata;
 import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
@@ -36,20 +34,20 @@ public class MediaMetadataService {
 		File file = mediaMetadataWithFile.getFile();
 		EncodingService encodingService = new EncodingService(encoding);
 		MediaMetadata mediaMetadata = encodingService
-				.getMediaMetadataWithEncoding(mediaMetadataWithFile);
+				.getMediaMetadataEncoding(mediaMetadataWithFile);
 
-		MediaFile mediaFile = new MP3File(file);
-		ID3V2_3_0Tag oID3V2_3_0Tag = new ID3V2_3_0Tag();
+		MP3File mp3File = new MP3File(file);
+		ID3V2Tag tag = mp3File.getID3V2Tag();
 		TextEncoding.setDefaultTextEncoding(TextEncoding.UNICODE);
 
-		// oID3V2_3_0Tag.setAlbum("Album");
-		// oID3V2_3_0Tag.setGenre("Blues");
-		oID3V2_3_0Tag.setArtist(mediaMetadata.getArtist());
-		oID3V2_3_0Tag.setTitle(mediaMetadata.getTitle());
-		mediaFile.setID3Tag(oID3V2_3_0Tag);
+		tag.setArtist(mediaMetadata.getArtist());
+		tag.setTitle(mediaMetadata.getTitle());
+		tag.setAlbum(mediaMetadata.getAlbum());
+
+		mp3File.setID3Tag(tag);
 
 		// update the actual file to reflect the current state of our object
-		mediaFile.sync();
+		mp3File.sync();
 	}
 
 	public void extractMetadata(MediaMetadataWithFile mediaMetadata) {
@@ -71,29 +69,7 @@ public class MediaMetadataService {
 		mediaMetadata.setArtist(artist);
 		mediaMetadata.setImage(image);
 
-		//validateMetadata(mediaMetadata);
+		// validateMetadata(mediaMetadata);
 		metaRetriever.release();
 	}
-
-//	public void validateMetadata(MediaMetadataWithFile mediaMetadata) {
-//		String title = mediaMetadata.getTitle();
-//		String artist = mediaMetadata.getArtist();
-//
-//		// if (title == null || title.isEmpty()) {
-//		// String name = mediaMetadata.getFile().getName();
-//		// int pos = name.lastIndexOf(".");
-//		// if (pos > 0) {
-//		// name = name.substring(0, pos);
-//		// }
-//		// mediaMetadata.setTitle(name);
-//		// }
-//
-//		if (title == null || title.isEmpty()) {
-//			mediaMetadata.setTitle("unknown title");
-//		}
-//		
-//		if (artist == null || artist.isEmpty()) {
-//			mediaMetadata.setArtist("unknown artist");
-//		}
-//	}
 }

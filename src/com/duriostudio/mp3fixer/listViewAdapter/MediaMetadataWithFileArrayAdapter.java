@@ -106,7 +106,7 @@ public class MediaMetadataWithFileArrayAdapter extends
 		if (image != null) {
 			loadBitmap(image, holder.imageView);
 		} else {
-			holder.imageView.setImageResource(android.R.color.transparent);
+			holder.imageView.setImageResource(R.drawable.earcandylogo);
 		}
 
 		holder.checkbox.setTag(position);

@@ -12,5 +12,6 @@
     <string name="imageDesc">logo</string>
     <string name="title_activity_selected_media">Select media</string>
     <string name="title_activity_logo">MP3Fixer</string>
+    <string name="debuggable">true</string>
 
 </resources>

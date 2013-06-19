@@ -10,8 +10,8 @@ public class FileService {
 
 	private String getCurrentDir() {
 		String root = Environment.getExternalStorageDirectory().toString();
-		// return root;
-		return root + "/" + Environment.DIRECTORY_MUSIC;
+		return root;
+		//return root + "/" + Environment.DIRECTORY_MUSIC;
 	}
 
 	public List<File> getListFiles() {
