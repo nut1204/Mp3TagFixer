@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.service;
+package com.duriostudio.mp3tagfixer.service;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedMap;
 
-import com.duriostudio.mp3fixer.model.MediaMetadata;
+import com.duriostudio.mp3tagfixer.model.MediaMetadata;
 
 public class EncodingService {
 

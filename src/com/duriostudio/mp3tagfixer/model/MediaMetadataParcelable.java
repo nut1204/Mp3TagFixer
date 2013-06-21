@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.model;
+package com.duriostudio.mp3tagfixer.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

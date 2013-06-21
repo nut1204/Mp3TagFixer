@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.listViewAdapter;
+package com.duriostudio.mp3tagfixer.listViewAdapter;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.duriostudio.mp3fixer.R;
-import com.duriostudio.mp3fixer.model.MediaMetadata;
+import com.duriostudio.mp3tagfixer.model.MediaMetadata;
 
 public class MediaMetadataArrayAdapter extends ArrayAdapter<MediaMetadata> {
 

@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.model;
+package com.duriostudio.mp3tagfixer.model;
 
 public class MediaMetadata {
 	protected String title;

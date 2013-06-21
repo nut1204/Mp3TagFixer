@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.service;
+package com.duriostudio.mp3tagfixer.service;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,9 +7,10 @@ import org.blinkenlights.jid3.MP3File;
 import org.blinkenlights.jid3.io.TextEncoding;
 import org.blinkenlights.jid3.v2.ID3V2Tag;
 import android.media.MediaMetadataRetriever;
-import com.duriostudio.mp3fixer.filter.IMediaMetadataFilter;
-import com.duriostudio.mp3fixer.model.MediaMetadata;
-import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
+
+import com.duriostudio.mp3tagfixer.filter.IMediaMetadataFilter;
+import com.duriostudio.mp3tagfixer.model.MediaMetadata;
+import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
 
 public class MediaMetadataService {
 

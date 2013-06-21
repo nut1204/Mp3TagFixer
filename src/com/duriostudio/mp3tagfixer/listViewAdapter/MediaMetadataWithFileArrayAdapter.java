@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.listViewAdapter;
+package com.duriostudio.mp3tagfixer.listViewAdapter;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -23,8 +23,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.duriostudio.mp3fixer.R;
-import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
-import com.duriostudio.mp3fixer.service.FileService;
+import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
+import com.duriostudio.mp3tagfixer.service.FileService;
 
 public class MediaMetadataWithFileArrayAdapter extends
 		ArrayAdapter<MediaMetadataWithFile> {

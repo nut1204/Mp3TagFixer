@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer;
+package com.duriostudio.mp3tagfixer;
 
 import com.duriostudio.mp3fixer.R;
 import android.app.Activity;

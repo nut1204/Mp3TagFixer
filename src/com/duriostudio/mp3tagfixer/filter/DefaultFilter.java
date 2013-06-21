@@ -1,6 +1,6 @@
-package com.duriostudio.mp3fixer.filter;
+package com.duriostudio.mp3tagfixer.filter;
 
-import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
+import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
 
 public class DefaultFilter implements IMediaMetadataFilter {
 

@@ -1,14 +1,14 @@
-package com.duriostudio.mp3fixer;
+package com.duriostudio.mp3tagfixer;
 
 import java.util.ArrayList;
 
 import com.duriostudio.mp3fixer.R;
-import com.duriostudio.mp3fixer.filter.DefaultFilter;
-import com.duriostudio.mp3fixer.listViewAdapter.MediaMetadataWithFileArrayAdapter;
-import com.duriostudio.mp3fixer.model.MediaMetadataParcelable;
-import com.duriostudio.mp3fixer.model.MediaMetadataWithFile;
-import com.duriostudio.mp3fixer.service.FileService;
-import com.duriostudio.mp3fixer.service.MediaMetadataService;
+import com.duriostudio.mp3tagfixer.filter.DefaultFilter;
+import com.duriostudio.mp3tagfixer.listViewAdapter.MediaMetadataWithFileArrayAdapter;
+import com.duriostudio.mp3tagfixer.model.MediaMetadataParcelable;
+import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
+import com.duriostudio.mp3tagfixer.service.FileService;
+import com.duriostudio.mp3tagfixer.service.MediaMetadataService;
 
 import android.os.Bundle;
 import android.os.Parcelable;

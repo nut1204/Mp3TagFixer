@@ -1,4 +1,4 @@
-package com.duriostudio.mp3fixer.service;
+package com.duriostudio.mp3tagfixer.service;
 
 import java.io.File;
 import java.util.ArrayList;
