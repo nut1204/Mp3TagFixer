@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.duriostudio.mp3fixer.R;
+import com.duriostudio.mp3tagfixer.R;
 import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
 import com.duriostudio.mp3tagfixer.service.FileService;
 
@@ -89,26 +90,20 @@ public class MediaMetadataWithFileArrayAdapter extends
 		title = element.getTitle();
 		artist = element.getArtist();
 
-		if (title == null) {
-			holder.tbTitle.setText(FileService.getName(element.getPath()));
-		} else {
+		if (title != null && title.trim().length() > 0) {
 			holder.tbTitle.setText(title);
+		} else {
+			holder.tbTitle.setText(FileService.getName(element.getPath()));
 		}
 
-		if (artist == null) {
-			holder.tvArtist.setText("unknown artist");
-		} else {
+		if (artist != null && artist.trim().length() > 0) {
 			holder.tvArtist.setText(artist);
+		} else {
+			holder.tvArtist.setText("unknown artist");
 		}
 
 		holder.path = element.getPath();
-		byte[] image = element.getImage();
-		if (image != null) {
-			loadBitmap(image, holder.imageView);
-		} else {
-			holder.imageView.setImageResource(R.drawable.earcandylogo);
-		}
-
+		loadBitmap(element.getPath(), holder.imageView);
 		holder.checkbox.setTag(position);
 		holder.checkbox.setChecked(element.isSelected());
 
@@ -145,7 +140,7 @@ public class MediaMetadataWithFileArrayAdapter extends
 		final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
 
 		if (bitmapWorkerTask != null) {
-			final byte[] bitmapData = bitmapWorkerTask.data;
+			final String bitmapData = bitmapWorkerTask.data;
 			if (bitmapData != data) {
 				// Cancel previous task
 				bitmapWorkerTask.cancel(true);
@@ -159,9 +154,7 @@ public class MediaMetadataWithFileArrayAdapter extends
 		return true;
 	}
 
-	public void loadBitmap(byte[] image, ImageView imageView) {
-		// BitmapWorkerTask task = new BitmapWorkerTask(imageView);
-		// task.execute(image);
+	public void loadBitmap(String image, ImageView imageView) {
 		if (cancelPotentialWork(image, imageView)) {
 			final BitmapWorkerTask task = new BitmapWorkerTask(imageView);
 			final AsyncDrawable asyncDrawable = new AsyncDrawable(
@@ -169,12 +162,11 @@ public class MediaMetadataWithFileArrayAdapter extends
 			imageView.setImageDrawable(asyncDrawable);
 			task.execute(image);
 		}
-
 	}
 
-	public class BitmapWorkerTask extends AsyncTask<byte[], Void, Bitmap> {
+	public class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 		private final WeakReference<ImageView> imageViewReference;
-		private byte[] data = null;
+		private String data = null;
 
 		public BitmapWorkerTask(ImageView imageView) {
 			// Use a WeakReference to ensure the ImageView can be garbage
@@ -183,9 +175,22 @@ public class MediaMetadataWithFileArrayAdapter extends
 		}
 
 		@Override
-		protected Bitmap doInBackground(byte[]... params) {
+		protected Bitmap doInBackground(String... params) {
 			data = params[0];
-			return BitmapFactory.decodeByteArray(data, 0, data.length);
+
+			byte[] image;
+			MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
+			try {
+				metaRetriever.setDataSource(data);
+				image = metaRetriever.getEmbeddedPicture();
+			} catch (Exception e) {
+				image = null;
+			} finally {
+				metaRetriever.release();
+			}
+
+			return (image != null) ? BitmapFactory.decodeByteArray(image, 0,
+					image.length) : null;
 		}
 
 		@Override
@@ -194,11 +199,15 @@ public class MediaMetadataWithFileArrayAdapter extends
 				bitmap = null;
 			}
 
-			if (imageViewReference != null && bitmap != null) {
+			if (imageViewReference != null) {
 				final ImageView imageView = imageViewReference.get();
-				final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-				if (this == bitmapWorkerTask && imageView != null) {
-					imageView.setImageBitmap(bitmap);
+				if (bitmap != null) {
+					final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
+					if (this == bitmapWorkerTask && imageView != null) {
+						imageView.setImageBitmap(bitmap);
+					}
+				} else {
+					imageView.setImageResource(R.drawable.earcandylogo);
 				}
 			}
 		}

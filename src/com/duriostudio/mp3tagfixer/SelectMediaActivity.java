@@ -1,17 +1,12 @@
 package com.duriostudio.mp3tagfixer;
 
 import java.util.ArrayList;
-
-import com.duriostudio.mp3fixer.R;
-import com.duriostudio.mp3tagfixer.filter.DefaultFilter;
+import com.duriostudio.mp3tagfixer.R;
 import com.duriostudio.mp3tagfixer.listViewAdapter.MediaMetadataWithFileArrayAdapter;
 import com.duriostudio.mp3tagfixer.model.MediaMetadataParcelable;
 import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
-import com.duriostudio.mp3tagfixer.service.FileService;
 import com.duriostudio.mp3tagfixer.service.MediaMetadataService;
-
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -34,24 +29,9 @@ public class SelectMediaActivity extends Activity {
 		listview.setLongClickable(true);
 	}
 
-	public ArrayList<MediaMetadataWithFile> getDataOnListViewInitial() {
-		Intent itn = getIntent();
-		ArrayList<Parcelable> mediaParcelableList = (ArrayList<Parcelable>) itn
-				.getParcelableArrayListExtra("medialist");
-
-		ArrayList<MediaMetadataWithFile> mediaMetadata = new ArrayList<MediaMetadataWithFile>();
-		for (Parcelable mediaParcelable : mediaParcelableList) {
-			MediaMetadataParcelable mediaMetadataParcelable = (MediaMetadataParcelable) mediaParcelable;
-			mediaMetadata.add(mediaMetadataParcelable.getMediaMetadata());
-		}
-		return mediaMetadata;
-	}
-
 	public ArrayList<MediaMetadataWithFile> getDataOnListView() {
-		FileService fileService = new FileService();
 		ArrayList<MediaMetadataWithFile> mediaMetadata = new MediaMetadataService()
-				.getListMediaMetadata(fileService.getListFiles(),
-						new DefaultFilter());
+				.getPlayList(this);
 		return mediaMetadata;
 	}
 

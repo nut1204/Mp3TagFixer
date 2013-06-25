@@ -6,7 +6,7 @@ public class MediaMetadataWithFile extends MediaMetadata {
 	private String path;
 
 	private boolean selected;
-
+	
 	public MediaMetadataWithFile(String path) {
 		this.path = path;
 	}

@@ -4,7 +4,6 @@ public class MediaMetadata {
 	protected String title;
 	protected String artist;
 	protected String album;
-	protected byte[] image;
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -28,13 +27,5 @@ public class MediaMetadata {
 
 	public String getArtist() {
 		return artist;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
-	public byte[] getImage() {
-		return image;
 	}
 }

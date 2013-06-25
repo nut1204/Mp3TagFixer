@@ -1,13 +1,13 @@
 package com.duriostudio.mp3tagfixer;
 
-import com.duriostudio.mp3fixer.R;
+import com.duriostudio.mp3tagfixer.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 public class LogoActivity extends Activity {
 
-	long splashTime = 2000;
+	long splashTime = 1000;
 	boolean active = true;
 
 	@Override

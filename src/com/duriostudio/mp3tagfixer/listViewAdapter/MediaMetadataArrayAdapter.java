@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.duriostudio.mp3fixer.R;
+import com.duriostudio.mp3tagfixer.R;
 import com.duriostudio.mp3tagfixer.model.MediaMetadata;
 
 public class MediaMetadataArrayAdapter extends ArrayAdapter<MediaMetadata> {

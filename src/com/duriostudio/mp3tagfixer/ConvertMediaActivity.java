@@ -1,15 +1,16 @@
 package com.duriostudio.mp3tagfixer;
 
 import java.util.ArrayList;
-import com.duriostudio.mp3fixer.R;
+import com.duriostudio.mp3tagfixer.R;
 import com.duriostudio.mp3tagfixer.listViewAdapter.MediaMetadataArrayAdapter;
 import com.duriostudio.mp3tagfixer.model.MediaMetadata;
 import com.duriostudio.mp3tagfixer.model.MediaMetadataParcelable;
 import com.duriostudio.mp3tagfixer.model.MediaMetadataWithFile;
 import com.duriostudio.mp3tagfixer.service.EncodingService;
 import com.duriostudio.mp3tagfixer.service.MediaMetadataService;
-
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.content.Intent;
@@ -125,13 +126,18 @@ public class ConvertMediaActivity extends Activity implements
 					getApplicationContext(),
 					"Convert mp3 finish please clear data in google play music.",
 					Toast.LENGTH_LONG).show();
+
+			sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
+					Uri.parse("file://"
+							+ Environment.getExternalStorageDirectory())));
+
 			finish();
 
 		} else {
 			Toast.makeText(getApplicationContext(), "Please select music.",
 					Toast.LENGTH_LONG).show();
 		}
-		
+
 	}
 
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
@@ -145,11 +151,11 @@ public class ConvertMediaActivity extends Activity implements
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-	    super.onBackPressed();
-	    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+		super.onBackPressed();
+		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 	}
 
 	@Override
