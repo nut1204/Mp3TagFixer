@@ -38,7 +38,6 @@ public class EncodingService {
 		artist = getEncoding("artist", mediaMetadata.getArtist());
 		album = getEncoding("album", mediaMetadata.getAlbum());
 		
-
 		media.setTitle(title);
 		media.setArtist(artist);
 		media.setAlbum(album);

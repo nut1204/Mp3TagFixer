@@ -33,13 +33,11 @@ public class MediaMetadataService {
 		String title = "";
 		String artist = "";
 		String album = "";
-		//byte[] image = null;
 
 		/*
 		 * run through all the columns we got back and save the data we need
 		 * into the arraylist for our listview
 		 */
-
 		ArrayList<MediaMetadataWithFile> songsList = new ArrayList<MediaMetadataWithFile>();
 		if (mCursor.moveToFirst()) {
 			do {
@@ -80,12 +78,22 @@ public class MediaMetadataService {
 		ID3V2Tag tag = mp3File.getID3V2Tag();
 		TextEncoding.setDefaultTextEncoding(TextEncoding.UNICODE);
 
-		tag.setArtist(mediaMetadata.getArtist());
-		tag.setTitle(mediaMetadata.getTitle());
-		tag.setAlbum(mediaMetadata.getAlbum());
+		String title, artist, album;
+		title = mediaMetadata.getTitle();
+		artist = mediaMetadata.getArtist();
+		album = mediaMetadata.getAlbum();
+
+		if (title != null && !title.isEmpty()) {
+			tag.setTitle(title);
+		}
+		if (artist != null && !artist.isEmpty()) {
+			tag.setArtist(artist);
+		}
+		if (album != null && !album.isEmpty()) {
+			tag.setAlbum(album);
+		}
 
 		mp3File.setID3Tag(tag);
-
 		// update the actual file to reflect the current state of our object
 		mp3File.sync();
 	}

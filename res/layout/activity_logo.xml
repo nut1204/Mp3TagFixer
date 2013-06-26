@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/imageDesc"
-        android:src="@drawable/mp3fixer" />
+        android:src="@drawable/screen" />
 
 </LinearLayout>
